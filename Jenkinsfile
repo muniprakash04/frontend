@@ -3,14 +3,10 @@ pipeline {
 
     stages {
 
-        stage('Clone') {
+        stage('Install Dependencies') {
             steps {
-                git 'https://github.com/muniprakash04/frontend.git'
-            }
-        }
-
-        stage('Install') {
-            steps {
+                sh 'pwd'
+                sh 'ls -la'
                 sh 'npm install'
             }
         }
@@ -30,6 +26,14 @@ pipeline {
                 '''
             }
         }
+    }
 
+    post {
+        success {
+            echo 'Deployment Successful!'
+        }
+        failure {
+            echo 'Deployment Failed!'
+        }
     }
 }
